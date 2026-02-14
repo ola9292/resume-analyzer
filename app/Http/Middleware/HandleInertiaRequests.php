@@ -38,6 +38,11 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'isLoggedIn' => auth()->check(),
+            'credit' => auth()->check() ? auth()->user()->credit : 0,
+            'has_credit' => auth()->check() ? auth()->user()->has_credit() : false,
+            'flash' => [
+                'message' => fn () => $request->session()->get('message'),
+            ],
         ];
     }
 }

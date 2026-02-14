@@ -82,7 +82,7 @@ const props = defineProps({
             </div>
 
             <!-- Generated Resume -->
-            <button @click.prevent="emit('toggle-edit')" class="btn btn-warning">{{ isEditing ? 'Print Mode' : 'Edit Mode'}}</button>
+            <button @click.prevent="emit('toggle-edit')" class="btn btn-warning">{{ isEditing ? 'Switch to print mode' : 'Switch to edit mode'}}</button>
             <div class="col-12">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">

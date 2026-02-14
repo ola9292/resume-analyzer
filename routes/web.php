@@ -1,12 +1,11 @@
 <?php
 
-use Inertia\Inertia;
-use App\Services\AIService;
-use Illuminate\Http\Request;
-use Smalot\PdfParser\Parser;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResumeController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,17 +23,17 @@ use App\Http\Controllers\ProfileController;
 // });
 Route::get('/', function () {
     return Inertia::render('Home');
-});
+})->name('home');
 
 // Route::post('/resume', function(Request $request){
 
-
 // });
 
- //resume analysis endpoints
-Route::get('/create', [ResumeController::class, 'create']);
-Route::post('/resume', [ResumeController::class, 'index']);
-Route::post('/resume/download', [ResumeController::class, 'download']);
+Route::get('/pricing', [CreditController::class, 'pricing']);
+Route::get('/support', [ResumeController::class, 'support']);
+Route::post('/support', [ResumeController::class, 'support_email'])->name('support');
+
+// resume analysis endpoints
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -45,6 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/create', [ResumeController::class, 'create'])->middleware('has.credit');
+    Route::post('/resume', [ResumeController::class, 'index']);
+    Route::post('/resume/download', [ResumeController::class, 'download']);
+
+    Route::post('/checkout', [CreditController::class, 'checkout']);
+    Route::get('/success', [CreditController::class, 'success'])->name('success');
+    Route::get('/cancel', [CreditController::class, 'cancel'])->name('cancel');
+    Route::post('/webhook', [CreditController::class, 'webhook'])->name('webhook');
 
 });
 

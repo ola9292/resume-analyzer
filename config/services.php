@@ -30,8 +30,13 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    'openai' =>[
-        'key' => env('OPENAI_API_KEY')
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+    ],
+    'stripe' => [
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'gold_price_id' => env('abc'),
+        'silver_price_id' => env('def'),
     ],
 
 ];

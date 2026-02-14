@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'credit',
     ];
 
     /**
@@ -41,5 +42,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'credit' => 'decimal:2',
     ];
+
+    public function has_credit()
+    {
+        if ($this->credit > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }

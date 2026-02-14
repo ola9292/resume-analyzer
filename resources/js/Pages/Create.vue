@@ -13,8 +13,14 @@ const form = ref({
 const analysis = ref(null)
 const loading = ref(false)
 const isEditing = ref(false)
+const errorMessage = ref(null)
 
 const handleSubmit = async () => {
+
+    if(!form.value.description || !form.value.resume){
+        alert('enter description and upload resume');
+        return
+    }
 
     const data = new FormData()
 
@@ -40,6 +46,8 @@ const handleSubmit = async () => {
 
     } catch (error) {
         console.error(error)
+        console.log(error.response)
+        errorMessage.value = error.response.data.message
     }finally{
         loading.value = false
     }
@@ -92,6 +100,9 @@ const handleToggleEdit = () => {
                 Discover skill gaps and generate a tailored CV in seconds.
             </p>
         </header>
+        <div v-if="errorMessage" class="alert alert-warning" role="alert">
+            {{ errorMessage }}
+        </div>
         <div v-if="analysis" class="container py-5">
             <Result :analysis="analysis" @toggle-edit="handleToggleEdit" :isEditing="isEditing"/>
             <button
