@@ -15,8 +15,8 @@ class CreditController extends Controller
     public function pricing()
     {
         $packages = [
-            ['name' => 'Silver', 'credit' => 20, 'price' => 5.00, 'price_id' => 'price_1T0UTl1DMC7Ht8eGhUG1RWWE'],
-            ['name' => 'Gold', 'credit' => 50, 'price' => 10.00, 'price_id' => 'price_1T0pYl1DMC7Ht8eGTcP5D4EA'],
+            ['name' => 'Silver', 'credit' => 20, 'price' => 5.00, 'price_id' => 'price_1T0tLI1DMC7Ht8eGsoHQMBEa'],
+            ['name' => 'Gold', 'credit' => 50, 'price' => 10.00, 'price_id' => 'price_1T0tLd1DMC7Ht8eGDIhMnu5S'],
         ];
 
         return Inertia::render('Pricing', ['packages' => $packages]);
